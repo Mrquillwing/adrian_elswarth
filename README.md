@@ -119,6 +119,9 @@ Hi there! I'm **Adrian Elswarth**, a high school student, programmer, and wander
 <p align="center">
   <em>"Building ideas through code. Exploring intelligence through curiosity."</em>
 </p>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
