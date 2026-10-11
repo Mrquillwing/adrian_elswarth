@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADRIAN ELSWARTH — GitHub Banner Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="studio-container">
+        <header class="studio-header">
+            <h1>ADRIAN ELSWARTH</h1>
+            <p>GITHUB BANNER STUDIO</p>
+        </header>
+
+        <div class="preview-wrapper">
+            <!-- BANNER ARTWORK CANVAS (Exact 1200 x 420 px) -->
+            <div id="github-banner" class="banner-canvas">
+                <!-- Background Details -->
+                <div class="banner-bg-grid"></div>
+                <div class="banner-glow-orb"></div>
+                <div class="banner-border">
+                    <div class="corner top-left"></div>
+                    <div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div>
+                    <div class="corner bottom-right"></div>
+                </div>
+
+                <!-- Left-Side Typography Section -->
+                <div class="banner-content-left">
+                    <h1 class="banner-name">
+                        <span class="name-adrian">ADRIAN</span>
+                        <span class="name-elswarth">ELSWARTH</span>
+                    </h1>
+                    <div class="banner-glow-line"></div>
+                    <div class="banner-title">AI &amp; MACHINE LEARNING ENTHUSIAST</div>
+                    <div class="banner-subtitle">HIGH SCHOOL STUDENT • PROGRAMMER • WANDERING ARTIST</div>
+                    
+                    <div class="banner-tags">
+                        <span class="tech-tag">PYTHON</span>
+                        <span class="tech-tag">ARTIFICIAL INTELLIGENCE</span>
+                        <span class="tech-tag">MACHINE LEARNING</span>
+                        <span class="tech-tag">CREATIVE CODING</span>
+                    </div>
+
+                    <div class="banner-quote">
+                        "Building ideas through code. Exploring intelligence through curiosity."
+                    </div>
+                </div>
+
+                <!-- Right-Side Original Artistic Emblem -->
+                <div class="banner-content-right">
+                    <div class="emblem-container">
+                        <div class="orbital-ring ring-1"></div>
+                        <div class="orbital-ring ring-2"></div>
+                        <div class="orbital-ring ring-3"></div>
+                        <div class="circuit-lines">
+                            <div class="circuit line-1"></div>
+                            <div class="circuit line-2"></div>
+                            <div class="circuit line-3"></div>
+                        </div>
+                        <div class="node node-1"></div>
+                        <div class="node node-2"></div>
+                        <div class="node node-3"></div>
+                        <div class="node node-4"></div>
+                        <div class="central-core">
+                            <div class="core-inner-glow"></div>
+                            <div class="glyph-a">A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="studio-controls">
+            <button id="download-btn" class="download-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download PNG (1200 × 420)
+            </button>
+            <p class="export-note">Exported filename: <code>adrian-banner.png</code></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
