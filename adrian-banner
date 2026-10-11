@@ -4,7 +4,412 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADRIAN ELSWARTH — GitHub Banner Studio</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-primary: #06110D;
+            --bg-secondary: #071B13;
+            --emerald-bright: #4BFFA0;
+            --mint-soft: #B8FFD1;
+            --text-main: #F3FFF8;
+            --text-secondary: #9BC9AD;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #030806;
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .studio-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            max-width: 1260px;
+            width: 100%;
+        }
+
+        .studio-header {
+            text-align: center;
+        }
+
+        .studio-header h1 {
+            font-size: 1.25rem;
+            letter-spacing: 4px;
+            color: var(--emerald-bright);
+            font-weight: 700;
+        }
+
+        .studio-header p {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .preview-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        /* EXACT BANNER SPECIFICATION: 1200 x 420 */
+        .banner-canvas {
+            width: 1200px;
+            height: 420px;
+            background-color: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 60px;
+            flex-shrink: 0;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Background Details & Grid */
+        .banner-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(75, 255, 160, 0.035) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(75, 255, 160, 0.035) 1px, transparent 1px);
+            background-size: 32px 32px;
+            z-index: 1;
+        }
+
+        .banner-glow-orb {
+            position: absolute;
+            right: 140px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(75, 255, 160, 0.14) 0%, rgba(7, 27, 19, 0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .banner-border {
+            position: absolute;
+            inset: 16px;
+            border: 1px solid rgba(75, 255, 160, 0.22);
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .corner {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-color: var(--emerald-bright);
+            border-style: solid;
+        }
+        .corner.top-left { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+        .corner.top-right { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+        .corner.bottom-left { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+        .corner.bottom-right { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+        /* Left-Side Typography */
+        .banner-content-left {
+            position: relative;
+            z-index: 3;
+            max-width: 660px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .banner-name {
+            font-size: 2.85rem;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: 1.5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .name-adrian {
+            color: var(--text-main);
+        }
+
+        .name-elswarth {
+            color: var(--mint-soft);
+            text-shadow: 0 0 20px rgba(184, 255, 209, 0.35);
+        }
+
+        .banner-glow-line {
+            width: 110px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--emerald-bright), transparent);
+            margin: 14px 0;
+            box-shadow: 0 0 10px var(--emerald-bright);
+        }
+
+        .banner-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--emerald-bright);
+            margin-bottom: 6px;
+        }
+
+        .banner-subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .banner-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .tech-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border: 1px solid rgba(75, 255, 160, 0.35);
+            border-radius: 3px;
+            background: rgba(7, 27, 19, 0.7);
+            color: var(--mint-soft);
+        }
+
+        .banner-quote {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            border-left: 2px solid rgba(75, 255, 160, 0.4);
+            padding-left: 10px;
+        }
+
+        /* Right-Side Artistic Emblem */
+        .banner-content-right {
+            position: relative;
+            z-index: 3;
+            width: 320px;
+            height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .emblem-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .central-core {
+            position: absolute;
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #071B13, #040E0A);
+            border: 2px solid var(--emerald-bright);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 35px rgba(75, 255, 160, 0.3), inset 0 0 15px rgba(75, 255, 160, 0.2);
+            animation: corePulse 4s ease-in-out infinite;
+            z-index: 4;
+        }
+
+        .core-inner-glow {
+            position: absolute;
+            inset: 6px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(75, 255, 160, 0.18) 0%, transparent 70%);
+        }
+
+        .glyph-a {
+            font-size: 3.3rem;
+            font-weight: 900;
+            color: var(--mint-soft);
+            text-shadow: 0 0 18px var(--emerald-bright);
+            font-family: monospace, sans-serif;
+            position: relative;
+            z-index: 2;
+        }
+
+        .orbital-ring {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .ring-1 {
+            width: 175px;
+            height: 175px;
+            border: 1.5px solid rgba(75, 255, 160, 0.45);
+            animation: rotateClockwise 25s linear infinite;
+        }
+
+        .ring-2 {
+            width: 235px;
+            height: 235px;
+            border: 1px dashed rgba(75, 255, 160, 0.35);
+            animation: rotateCounterClockwise 35s linear infinite;
+        }
+
+        .ring-3 {
+            width: 280px;
+            height: 280px;
+            border: 1px dotted rgba(184, 255, 209, 0.25);
+            animation: rotateClockwise 45s linear infinite;
+        }
+
+        .node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--emerald-bright);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--emerald-bright), 0 0 22px var(--emerald-bright);
+            animation: nodePulse 2s ease-in-out infinite alternate;
+            z-index: 5;
+        }
+
+        .node-1 { top: 25px; left: 95px; animation-delay: 0s; }
+        .node-2 { bottom: 35px; right: 75px; animation-delay: 0.5s; }
+        .node-3 { top: 110px; right: 15px; animation-delay: 1s; }
+        .node-4 { bottom: 85px; left: 20px; animation-delay: 1.5s; }
+
+        .circuit-lines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .circuit {
+            position: absolute;
+            background: linear-gradient(90deg, var(--emerald-bright), transparent);
+        }
+
+        .circuit.line-1 {
+            top: 70px;
+            left: 50%;
+            width: 90px;
+            height: 1px;
+            transform: rotate(30deg);
+            opacity: 0.65;
+        }
+
+        .circuit.line-2 {
+            bottom: 75px;
+            right: 50%;
+            width: 100px;
+            height: 1px;
+            transform: rotate(-35deg);
+            opacity: 0.65;
+        }
+
+        .circuit.line-3 {
+            top: 50%;
+            right: 25px;
+            width: 70px;
+            height: 1px;
+            opacity: 0.45;
+        }
+
+        /* Keyframe Animations */
+        @keyframes rotateClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateCounterClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        @keyframes corePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(75, 255, 160, 0.3), inset 0 0 15px rgba(75, 255, 160, 0.2); }
+            50% { transform: scale(1.03); box-shadow: 0 0 48px rgba(75, 255, 160, 0.5), inset 0 0 25px rgba(75, 255, 160, 0.35); }
+        }
+
+        @keyframes nodePulse {
+            from { opacity: 0.5; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1.2); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .orbital-ring, .central-core, .node {
+                animation: none !important;
+            }
+        }
+
+        /* Studio Controls */
+        .studio-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-button {
+            background: linear-gradient(135deg, #4BFFA0, #2BC27A);
+            color: #030806;
+            border: none;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(75, 255, 160, 0.3);
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(75, 255, 160, 0.5);
+            background: linear-gradient(135deg, #60FFAF, #32D487);
+        }
+
+        .download-button:active {
+            transform: translateY(0);
+        }
+
+        .export-note {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .export-note code {
+            color: var(--emerald-bright);
+            background: rgba(7, 27, 19, 0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <div class="studio-container">
@@ -81,8 +486,90 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadBtn = document.getElementById('download-btn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', exportBannerToPNG);
+            }
+        });
+
+        function exportBannerToPNG() {
+            const bannerElement = document.getElementById('github-banner');
+            if (!bannerElement) return;
+
+            // Collect all stylesheet rules to ensure formatting carries into the SVG export
+            let cssStyles = '';
+            try {
+                for (let i = 0; i < document.styleSheets.length; i++) {
+                    const rules = document.styleSheets[i].cssRules;
+                    if (rules) {
+                        for (let j = 0; j < rules.length; j++) {
+                            cssStyles += rules[j].cssText + '\n';
+                        }
+                    }
+                }
+            } catch (e) {
+                console.warn('Stylesheet rule aggregation warning:', e);
+            }
+
+            const bannerHTML = bannerElement.outerHTML;
+
+            // Wrap elements into a self-contained SVG using foreignObject
+            const svgString = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420">
+                    <defs>
+                        <style>
+                            ${cssStyles}
+                            body { background: transparent !important; margin: 0; }
+                        </style>
+                    </defs>
+                    <foreignObject width="1200" height="420">
+                        <div xmlns="http://www.w3.org/1999/xhtml">
+                            ${bannerHTML}
+                        </div>
+                    </foreignObject>
+                </svg>
+            `;
+
+            const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const URL = window.URL || window.webkitURL || window;
+            const blobURL = URL.createObjectURL(blob);
+
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1200;
+                canvas.height = 420;
+                const ctx = canvas.getContext('2d');
+                
+                // Solid dark background backup for transparency insurance
+                ctx.fillStyle = '#06110D';
+                ctx.fillRect(0, 0, 1200, 420);
+                
+                ctx.drawImage(img, 0, 0);
+                
+                const pngDataURL = canvas.toDataURL('image/png');
+                
+                // Trigger automated file download
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pngDataURL;
+                downloadLink.download = 'adrian-banner.png';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                URL.revokeObjectURL(blobURL);
+            };
+
+            img.onerror = (err) => {
+                console.error('Image generation error:', err);
+                alert('Could not export image in this browser. Please try Chrome or Firefox.');
+                URL.revokeObjectURL(blobURL);
+            };
+
+            img.src = blobURL;
+        }
+    </script>
 </body>
 </html>
-
-
